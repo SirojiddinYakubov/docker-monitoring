@@ -27,5 +27,5 @@ scrape_configs:
       - targets: ['165.22.103.111:9100']
     metrics_path: "/metrics"
     basic_auth:
-      username: $ADMIN_USER
-      password: $ADMIN_PASSWORD
+      username: ADMIN_USER
+      password: ADMIN_PASSWORD
