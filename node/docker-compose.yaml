@@ -30,6 +30,7 @@ services:
     container_name: caddy
     ports:
       - "9100:9100"
+      - "9323:9323"  # for docker metrics
     volumes:
       - ./caddy:/etc/caddy
     environment:
