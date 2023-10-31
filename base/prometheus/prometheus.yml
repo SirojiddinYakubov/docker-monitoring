@@ -29,3 +29,10 @@ scrape_configs:
     basic_auth:
       username: ADMIN_USER
       password: ADMIN_PASSWORD
+
+  - job_name: "dev-docker"
+    static_configs:
+      - targets: ["165.22.103.111:9323"]
+    basic_auth:
+      username: ADMIN_USER
+      password: ADMIN_PASSWORD
