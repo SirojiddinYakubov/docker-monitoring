@@ -19,4 +19,6 @@ node-up:
 node-down:
 	docker compose -f node/docker-compose.yaml down
 change-pass:
+	sed -i "s|ADMIN_USER|${ADMIN_USER}|g" base/prometheus/prometheus.yml && sed -i "s|ADMIN_PASSWORD|${ADMIN_PASSWORD}|g" base/prometheus/prometheus.yml
+change-pass-mac:
 	sed -i '' -e "s|ADMIN_USER|${ADMIN_USER}|g" base/prometheus/prometheus.yml && sed -i '' -e "s|ADMIN_PASSWORD|${ADMIN_PASSWORD}|g" base/prometheus/prometheus.yml
