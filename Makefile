@@ -1,5 +1,11 @@
 #!/usr/bin/make
 
+help:
+	@echo "make"
+	@echo "	node-up"
+	@echo "		ADMIN_USER=admin ADMIN_PASSWORD=admin ADMIN_PASSWORD_HASH='$2a$14$1l.IozJx7xQRVmlkEQ32OeEEfP5mRxTpbDTCTcXRqn19gXD8YK1pO' docker compose -f node/docker-compose.yaml up -d --build or export environment variables and run: docker compose -f node/docker-compose.yaml up -d --build"
+
+
 base-build:
 	docker compose -f base/docker-compose.yaml build
 base-up:
