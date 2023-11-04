@@ -2,7 +2,8 @@ version: '3.9'
 
 networks:
   monitor-net:
-    driver: bridge
+    name: prod-backend-network
+    external: true
 
 volumes:
     prometheus_data: {}
@@ -14,7 +15,7 @@ services:
     image: prom/prometheus:v2.46.0
     container_name: prometheus
     volumes:
-      - ./prometheus:/etc/prometheus
+      - ./prometheus:/etc/prometheus:ro
       - prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -23,6 +24,8 @@ services:
       - '--web.console.templates=/etc/prometheus/consoles'
       - '--storage.tsdb.retention.time=200h'
       - '--web.enable-lifecycle'
+      - '--web.external-url=https://topskill.uz/prometheus/'
+      - '--web.route-prefix=/'
     restart: unless-stopped
     environment:
       - ADMIN_USER=${ADMIN_USER:-admin}
@@ -85,29 +88,15 @@ services:
       - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
       - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
       - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_LOG_LEVEL=debug
+      - GF_SERVER_SERVE_FROM_SUB_PATH=true
+      - GF_SERVER_DOMAIN=topskill.uz
+      - GF_SERVER_ROOT_URL=https://topskill.uz/grafana/
     restart: unless-stopped
     expose:
-      - 3000
+      - "3000"
     networks:
       - monitor-net
     labels:
       org.label-schema.group: "monitoring"
 
-  caddy:
-    image: caddy:2.6.4
-    container_name: caddy
-    ports:
-      - "3000:3000"
-      - "8080:8080"
-      - "9090:9090"
-    volumes:
-      - ./caddy:/etc/caddy
-    environment:
-      - ADMIN_USER=${ADMIN_USER:-admin}
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
-      - ADMIN_PASSWORD_HASH=${ADMIN_PASSWORD_HASH:-$2a$14$1l.IozJx7xQRVmlkEQ32OeEEfP5mRxTpbDTCTcXRqn19gXD8YK1pO}
-    restart: unless-stopped
-    networks:
-      - monitor-net
-    labels:
-      org.label-schema.group: "monitoring"
