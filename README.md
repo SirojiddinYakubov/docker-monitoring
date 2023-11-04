@@ -18,14 +18,9 @@ source ./init.sh
 ```
 make node-up
 ```
-#### 5) Enter your server's IP address instead of the 165.22.103.111 IP address in the base/prometheus/prometheus.yml file
+#### 5) Enter your server's IP address or domain instead of the dev.topskill.uz IP address in the base/prometheus/prometheus.yml file
 
 #### 6) Run containers for base server
 ```
 make base-up
-```
-
-#### 7) Open Grafana dashboard
-```
-http://localhost:3000
 ```

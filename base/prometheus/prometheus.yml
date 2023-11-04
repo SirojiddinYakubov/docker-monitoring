@@ -34,5 +34,5 @@ scrape_configs:
 #    static_configs:
 #      - targets: ["165.22.103.111:9323"]
 #    basic_auth:
-#      username: ADMIN_USER
-#      password: ADMIN_PASSWORD
+#      username: admin
+#      password: admin
