@@ -23,16 +23,17 @@ scrape_configs:
   - job_name: 'dev-server'
     scrape_interval: 10s
     honor_labels: true
+    scheme: https
     static_configs:
-      - targets: ['dev.topskill.uz:443']
+      - targets: ['dev.topskill.uz']
     metrics_path: "/metrics"
     basic_auth:
-      username: ADMIN_USER
-      password: ADMIN_PASSWORD
+      username: monitor
+      password: 732Ex29rWhtp
 
 #  - job_name: "dev-docker"
 #    static_configs:
 #      - targets: ["165.22.103.111:9323"]
 #    basic_auth:
-#      username: ADMIN_USER
-#      password: ADMIN_PASSWORD
+#      username: monitoring
+#      password: 732Ex29rWhtp
